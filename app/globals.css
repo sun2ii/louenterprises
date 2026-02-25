@@ -1,26 +1,175 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+  --cyan: #00D9FF;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cyan: var(--cyan);
+  --font-sans: var(--font-archivo);
+
+  --font-size-8xl: 6rem;
+  --font-size-8xl--line-height: 1;
+
+  --font-size-6xl: 3.75rem;
+  --font-size-6xl--line-height: 1.1;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
+html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  height: auto;
+  min-height: 100vh;
+}
+
+/* Scroll Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Label Change Animation */
+.label-animate {
+  animation: labelFadeSlide 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes labelFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Menu Item Slide Animation */
+@keyframes menuItemSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section Indicator Pulse */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* Image Loading Fade */
+.image-loaded {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Staggered Label Animations */
+@keyframes labelFadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate(0, -50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%) translateY(0);
+  }
+}
+
+@keyframes labelFadeInCenter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+}
+
+@keyframes labelFadeInRight {
+  from {
+    opacity: 0;
+    transform: translate(0, -50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%) translateY(0);
+  }
+}
+
+.label-animate-left {
+  animation: labelFadeInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+.label-animate-center {
+  animation: labelFadeInCenter 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
+  opacity: 0;
+}
+
+.label-animate-right {
+  animation: labelFadeInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+  opacity: 0;
+}
+
+/* Mobile Stacked Labels Animation - opacity only, no transform conflict */
+@keyframes labelFadeInMobile {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.label-animate-mobile {
+  animation: labelFadeInMobile 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
+  opacity: 0;
+}
+
+/* Label Blur + Slide Transitions */
+.label-transition {
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.label-transition-out {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(-10px);
+}
+
+.label-transition-in {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
 }
